@@ -30,6 +30,8 @@ exports = module.exports = function (_grail) {
 
 				scope[_key + 'Controller'] = grail.controllers[_key];
 			});
+
+			grail.emit('angular:end');
 		},
 
 		routes: function ($routeProvider, $locationProvider) {
@@ -75,7 +77,6 @@ exports = module.exports = function (_grail) {
 	grail.angular.routes.$inject = ['$routeProvider', '$locationProvider'];
 	grail.angular.module = angular.module('app', ['ngRoute']).config(grail.angular.routes);
 
-	grail.emit('angular:end');
 };
 
 emitter(exports);
