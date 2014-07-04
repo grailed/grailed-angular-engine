@@ -172,7 +172,9 @@ if (typeof angular === 'undefined') {
 var emitter = _dereq_('emitter-component');
 
 exports = module.exports = function (_grail) {
-	var grail = _grail;
+	var grail = _grail,
+		angularConfig = grail.config('angular') || {},
+		modules = Array.isArray(angularConfig.modules) ? angularConfig.modules : [];
 
 	grail.angular = {
 
@@ -197,6 +199,8 @@ exports = module.exports = function (_grail) {
 
 				scope[_key + 'Controller'] = grail.controllers[_key];
 			});
+
+			grail.emit('angular:end');
 		},
 
 		routes: function ($routeProvider, $locationProvider) {
@@ -238,12 +242,13 @@ exports = module.exports = function (_grail) {
 		}
 	});
 
+	modules.unshift('ngRoute');
+
 	grail.angular.controller.$inject = ['$scope', '$route', '$routeParams', '$location'];
 	grail.angular.routes.$inject = ['$routeProvider', '$locationProvider'];
+	grail.angular.module = angular.module('app', modules).config(grail.angular.routes);
 
-	angular.module('app', ['ngRoute']).config(grail.angular.routes);
-
-	grail.emit('angular:initialised');
+	grail.emit('angular:end');
 };
 
 emitter(exports);

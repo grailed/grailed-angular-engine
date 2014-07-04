@@ -81,6 +81,7 @@ exports = module.exports = function (_grail) {
 	grail.angular.routes.$inject = ['$routeProvider', '$locationProvider'];
 	grail.angular.module = angular.module('app', modules).config(grail.angular.routes);
 
+	grail.emit('angular:start');
 };
 
 emitter(exports);
