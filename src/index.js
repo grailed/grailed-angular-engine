@@ -78,7 +78,7 @@ exports = module.exports = function (_grail) {
 
 	modules.unshift('ngRoute');
 
-	grail.angular.controller.$inject = ['$scope', '$route', '$routeParams', '$location'];
+	grail.angular.controller.$inject = ['$scope', '$route', '$routeParams', '$location', '$http'];
 	grail.angular.routes.$inject = ['$routeProvider', '$locationProvider'];
 	grail.angular.module = angular.module('app', modules).config(grail.angular.routes);
 
