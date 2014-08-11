@@ -11,12 +11,13 @@ exports = module.exports = function (_grail) {
 
 	grail.angular = {
 
-		controller: function ($scope, $route, $routeParams, $location) {
+		controller: function ($scope, $route, $routeParams, $location, $http) {
 			var scope = grail.angular.scope = $scope;
 
 			scope.$location = $location;
 			scope.$route = $route;
 			scope.$routeParams = $routeParams;
+			scope.$http = $http;
 
 			Object.keys(grail.controllers).forEach(function (_key) {
 				Object.defineProperties(grail.controllers[_key], {
